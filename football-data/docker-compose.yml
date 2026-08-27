@@ -1,0 +1,64 @@
+services:
+  db:
+    image: postgres:15
+    container_name: football-db
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
+    container_name: football-api
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: db
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  ingest:
+    build:
+      context: .
+      dockerfile: ./jobs/Dockerfile
+    container_name: football-ingest
+    env_file:
+      - .env
+      - ./request-API/keyapi.env
+    environment:
+      POSTGRES_HOST: db
+    depends_on:
+      - db
+  features:
+    build:
+      context: .
+      dockerfile: ./jobs/Dockerfile
+    container_name: football-features
+    command: python build_features.py
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: db
+    depends_on:
+      - db
+  seed:
+    build:
+      context: .
+      dockerfile: ./jobs/Dockerfile
+    container_name: football-seed
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: db
+    depends_on:
+      - db
+    restart: "no"
+    command: python send_game_to_postgres.py
+volumes:
+  postgres_data:

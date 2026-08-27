@@ -1,0 +1,14 @@
+sudo docker run --name football-postgres \
+  -e POSTGRES_USER=foot \
+  -e POSTGRES_PASSWORD=footpass \
+  -e POSTGRES_DB=football \
+  -p 5432:5432 \
+  -d postgres
+ 
+sudo docker exec -it football-postgres psql -U foot -d football
+ SELECT home_team, away_team, home_score, away_score FROM matches LIMIT 10;
+ SELECT * FROM features LIMIT 10;
+
+ 
+ python libraries package
+ 

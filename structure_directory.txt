@@ -1,0 +1,13 @@
+Projet AI Betting predictions
+
+Structure directory
+mkdir football-ai-agent
+cd football-ai-agent
+
+
+football-ai-agent/
+│
+├── data_collector/
+│   └── main.py
+├── .env
+└── requirements.txt

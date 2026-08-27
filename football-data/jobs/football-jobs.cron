@@ -1,0 +1,2 @@
+# Run the football job pipeline every day at midnight
+0 0 * * * root /job/run_daily_jobs.sh >> /var/log/football-jobs.log 2>&1

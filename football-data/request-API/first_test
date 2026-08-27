@@ -1,0 +1,31 @@
+import requests
+
+# API Details
+BASE_URL = "https://api.football-data.org/v4/"
+API_KEY = "f87996cf41cc4a65a8d1179a41a2e769"  
+
+# Set up headers for authentication
+headers = {
+    "X-Auth-Token": API_KEY
+}
+
+# Function to fetch Premier League matches
+def get_premier_league_matches():
+    endpoint = "competitions/PL/matches"
+    response = requests.get(BASE_URL + endpoint, headers=headers)
+
+    if response.status_code == 200:
+        data = response.json()
+        return data  # Return JSON data
+    else:
+        print(f"Error {response.status_code}: {response.text}")
+        return None
+
+# Example: Print match information
+matches = get_premier_league_matches()
+if matches:
+    for match in matches['matches']:
+        home_team = match['homeTeam']['name']
+        away_team = match['awayTeam']['name']
+        match_date = match['utcDate']
+        print(f"{home_team} vs {away_team} on {match_date}")

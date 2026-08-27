@@ -1,0 +1,54 @@
+import requests
+
+# Your API Key
+API_KEY = "your_api_key_here"
+HEADERS = {"x-apisports-key": API_KEY}
+
+# League and Season (Example: Premier League, 2023)
+LEAGUE_ID = 78  # Premier League
+SEASON = 2023
+
+# 1. Get all fixtures for the season
+fixtures_url = f"https://v3.football.api-sports.io/fixtures?league={LEAGUE_ID}&season={SEASON}"
+response = requests.get(fixtures_url, headers=HEADERS).json()
+
+total_home_games = 0
+home_games_conceded_first = 0
+home_games_won_after_conceding = 0
+
+for match in response['response']:
+    home_team = match['teams']['home']['name']
+    away_team = match['teams']['away']['name']
+    home_goals = match['goals']['home']
+    away_goals = match['goals']['away']
+    match_id = match['fixture']['id']
+
+    # Only check games where home team won
+    if home_goals > away_goals:
+        total_home_games += 1
+
+        # 2. Get match events (to see who scored first)
+        events_url = f"https://v3.football.api-sports.io/fixtures/events?fixture={match_id}"
+        events_response = requests.get(events_url, headers=HEADERS).json()
+
+        first_goal_team = None
+        for event in events_response['response']:
+            if event['type'] == 'Goal':
+                first_goal_team = event['team']['name']
+                break  # First goal found, exit loop
+
+        # 3. Check if home team conceded first
+        if first_goal_team and first_goal_team == away_team:
+            home_games_conceded_first += 1
+
+            # If home team won after conceding first
+            if home_goals > away_goals:
+                home_games_won_after_conceding += 1
+
+# 4. Calculate percentage
+if home_games_conceded_first > 0:
+    comeback_percentage = (home_games_won_after_conceding / home_games_conceded_first) * 100
+else:
+    comeback_percentage = 0
+
+print(f"Percentage of home teams that won after conceding first: {comeback_percentage:.2f}%")

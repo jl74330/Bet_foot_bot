@@ -1,0 +1,24 @@
+##python
+
+import http.client
+
+conn = http.client.HTTPSConnection("v3.football.api-sports.io")
+
+headers = {
+    'x-rapidapi-host': "v3.football.api-sports.io",
+    'x-rapidapi-key': "310f3659ee19ce4fa5b2b7c51e463cbf"
+    }
+
+conn.request("GET", "/leagues", headers=headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+
+
+curl --request GET \
+--url https://v3.football.api-sports.io/leagues \
+--header 'x-rapidapi-host: v3.football.api-sports.io' \
+--header 'x-rapidapi-key: 310f3659ee19ce4fa5b2b7c51e463cbf'
+
