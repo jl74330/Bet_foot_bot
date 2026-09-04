@@ -26,7 +26,10 @@ LEAGUES = {
     "PD": "La Liga",
     "SA": "Serie A",
     "FL1": "Ligue 1",
-    "FL2": "Ligue 2"
+    "FL2": "Ligue 2",
+    "BL1": "Bundesliga",
+    "DED": "Eredivisie",
+    "PPL": "Primeira Liga"
 
 }
 

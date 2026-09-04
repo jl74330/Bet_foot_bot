@@ -19,12 +19,15 @@ leagues = {
     "PD": "La Liga",
     "SA": "Serie A",
     "FL1": "Ligue 1",
-    "FL2": "Ligue 2"
+    "FL2": "Ligue 2",
+    "BL1": "Bundesliga",
+    "DED": "Eredivisie",
+    "PPL": "Primeira Liga"
 
 }
 
 # Saisons (année de début)
-seasons = [2020, 2021, 2022, 2023, 2024]
+seasons = [2020, 2021, 2022, 2023, 2024, 2025]
 
 all_matches = []
 
@@ -63,4 +66,4 @@ df = pd.DataFrame(all_matches)
 print(df.head())
 
 # sauvegarde en csv
-df.to_csv("matchesv2.csv", index=False)
+df.to_csv("matches.csv", index=False)
