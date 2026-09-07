@@ -16,7 +16,7 @@ data = response.json()
 
 matches = data["matches"]
 
-for match in matches[:10]:
+for match in matches[:20]:
     home = match["homeTeam"]["name"]
     away = match["awayTeam"]["name"]
     score = match["score"]["fullTime"]
