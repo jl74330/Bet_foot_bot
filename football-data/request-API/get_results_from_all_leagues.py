@@ -22,7 +22,9 @@ leagues = {
     "FL2": "Ligue 2",
     "BL1": "Bundesliga",
     "DED": "Eredivisie",
-    "PPL": "Primeira Liga"
+    "PPL": "Primeira Liga",
+    "CL": "Champions League",
+    "ELC": "Championship League"
 
 }
 
