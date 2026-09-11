@@ -11,9 +11,12 @@ from sqlalchemy import create_engine, text
 # CONFIGURATION
 # ============================================================
 
-# Les chemins sont relatifs au répertoire de travail du conteneur.
-load_dotenv("/app/.env")
-load_dotenv("/app/request-API/keyapi.env")
+# Récupère le dossier où se trouve le script actuel (ex: /job ou /app)
+BASE_DIR = os.path.dirname(__file__)
+
+# Chargement dynamique des deux fichiers d'environnement
+load_dotenv(dotenv_path=os.path.join(BASE_DIR, ".env"))
+load_dotenv(dotenv_path=os.path.join(BASE_DIR, "request-API", "keyapi.env"))
 
 API_KEY = os.getenv("API_KEY")
 
