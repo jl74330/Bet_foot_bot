@@ -48,18 +48,18 @@ services:
       POSTGRES_HOST: db
     depends_on:
       - db
-  seed:
-    build:
-      context: .
-      dockerfile: ./jobs/Dockerfile
-    container_name: football-seed
-    env_file:
-      - .env
-    environment:
-      POSTGRES_HOST: db
-    depends_on:
-      - db
-    restart: "no"
-    command: python send_game_to_postgres.py
+  #seed:
+    #build:
+      #context: .
+      #dockerfile: ./jobs/Dockerfile
+    #container_name: football-seed
+    #env_file:
+      #- .env
+    #environment:
+      #POSTGRES_HOST: db
+    #depends_on:
+      #- db
+    #restart: "no"
+    #command: python send_game_to_postgres.py
 volumes:
   postgres_data:

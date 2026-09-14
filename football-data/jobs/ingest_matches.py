@@ -53,7 +53,7 @@ LEAGUES = {
     "PPL": "Primeira Liga",
 }
 
-DEFAULT_SEASON = int(os.getenv("FOOTBALL_SEASON", "2026"))
+DEFAULT_SEASON = int(os.getenv("FOOTBALL_SEASON", "2023"))
 
 REQUEST_TIMEOUT = int(os.getenv("API_TIMEOUT", "30"))
 MAX_RETRIES = int(os.getenv("API_MAX_RETRIES", "3"))
